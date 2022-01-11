@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Strings.dart';
 import 'inputAlan.dart';
+import 'home_page.dart';
 
 class login extends StatelessWidget {
   login({Key? key}) : super(key: key);
@@ -49,7 +50,12 @@ class login extends StatelessWidget {
                 input_alan("user"),
                 input_alan("sifre"),
                 ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const home()),
+                      );
+                    },
                     child: Text(
                       "Giriş Yap",
                       style: TextStyle(fontSize: 18),
