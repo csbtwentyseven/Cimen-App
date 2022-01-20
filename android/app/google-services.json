@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "95541328247",
+    "project_id": "cimen-4bb06",
+    "storage_bucket": "cimen-4bb06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95541328247:android:b896d966dec35f24ba4972",
+        "android_client_info": {
+          "package_name": "com.example.cimen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95541328247-9mkt0md45vhq6r8i34qnt41aqtdq97t1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cimen",
+            "certificate_hash": "4bedb20f9abf87506e4d76284fda78eee38d795e"
+          }
+        },
+        {
+          "client_id": "95541328247-2gs5ksa5tpu144gisj9vvempqksfiu44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcySKIbMDlNuwCfd12-hrnEccWJRlDNRM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95541328247-2gs5ksa5tpu144gisj9vvempqksfiu44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

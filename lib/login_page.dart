@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'Strings.dart';
 import 'inputAlan.dart';
 import 'home_page.dart';
+import 'veritabani.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class login extends StatelessWidget {
   login({Key? key}) : super(key: key);
+
+  Veritabani veritabani = new Veritabani();
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +55,7 @@ class login extends StatelessWidget {
                 input_alan("sifre"),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const home()),
-                      );
+                      veritabani.kullaniciAdiKontrol();
                     },
                     child: Text(
                       "Giriş Yap",
