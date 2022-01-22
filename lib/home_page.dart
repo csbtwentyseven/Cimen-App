@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'veritabani.dart';
 
-class home extends StatelessWidget {
-  const home({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String cimenMesaj = "none";
+  void mesajDegistir(String mesaj) {
+    setState(() {
+      cimenMesaj = mesaj;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +23,8 @@ class home extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 80.0),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 80.0),
               child: Text(
                 "Çimen İstemek İçin Aşağıdaki Butona Bas Sadıç",
                 style: TextStyle(
@@ -21,14 +34,20 @@ class home extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () async {
+                Veritabani vt = Veritabani("gerekyok");
+                vt.cimenIste();
+
+                String cimenMesaj = await vt.cimenIstendiMi();
+                mesajDegistir(cimenMesaj);
+              },
               icon: Image.asset('assets/butonimg.png'),
               iconSize: 256,
             ),
             Padding(
               padding: EdgeInsets.only(top: 60.0),
               child: Text(
-                'Henüz Kimse Çimen İstemedi',
+                '$cimenMesaj',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,

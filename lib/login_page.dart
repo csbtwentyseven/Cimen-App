@@ -4,11 +4,12 @@ import 'inputAlan.dart';
 import 'home_page.dart';
 import 'veritabani.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'inputAlan.dart';
 
 class login extends StatelessWidget {
   login({Key? key}) : super(key: key);
 
-  Veritabani veritabani = new Veritabani();
+  InputAlan usernameData = new InputAlan("user");
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +51,9 @@ class login extends StatelessWidget {
               ),
             )),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                input_alan("user"),
-                input_alan("sifre"),
-                ElevatedButton(
-                    onPressed: () {
-                      veritabani.kullaniciAdiKontrol();
-                    },
-                    child: Text(
-                      "Giriş Yap",
-                      style: TextStyle(fontSize: 18),
-                    ))
+                InputAlan("user"),
               ],
             ),
           )

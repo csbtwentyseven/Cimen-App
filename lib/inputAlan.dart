@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'Strings.dart';
+import 'veritabani.dart';
+import 'home_page.dart';
 
-class input_alan extends StatefulWidget {
+class InputAlan extends StatefulWidget {
   late String tur;
-  input_alan(this.tur, {Key? key}) : super(key: key);
+
+  InputAlan(this.tur, {Key? key}) : super(key: key);
 
   @override
-  _input_alanState createState() => _input_alanState();
+  _InputAlanState createState() => _InputAlanState();
 }
 
-class _input_alanState extends State<input_alan> {
+class _InputAlanState extends State<InputAlan> {
   late TextEditingController _kullaniciAdiController;
   late TextEditingController _sifreKontroller;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _kullaniciAdiController = TextEditingController();
     _sifreKontroller = TextEditingController();
@@ -23,7 +25,6 @@ class _input_alanState extends State<input_alan> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _kullaniciAdiController.dispose();
     _sifreKontroller.dispose();
 
@@ -32,45 +33,48 @@ class _input_alanState extends State<input_alan> {
 
   @override
   Widget build(BuildContext context) {
+    String kullaniciAdi = _kullaniciAdiController.text;
     if (widget.tur == "user") {
       // this.tur bi ust class icin, stateful widget ici data paylasimi yapmak amaciyla widget kullan
       return Padding(
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-        child: TextFormField(
-          controller: _kullaniciAdiController,
-          autofocus: true,
-          decoration: InputDecoration(
-              labelText: Metinler.kullanici_adi,
-              hintText: Metinler.kullanici_adi,
-              prefixIcon: Icon(Icons.account_circle),
-              suffixIcon: Icon(Icons.lock),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF168039), width: 2.5),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFF168039), width: 2.5),
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              )),
-        ),
-      );
-    } else if (widget.tur == "sifre") {
-      return Padding(
-        padding:
-            const EdgeInsets.only(top: 40, left: 20, right: 20, bottom: 15),
-        child: TextFormField(
-          controller: _sifreKontroller,
-          obscureText: true,
-          decoration: InputDecoration(
-              labelText: Metinler.sifre,
-              hintText: Metinler.sifre,
-              prefixIcon: Icon(Icons.password_sharp),
-              suffixIcon: Icon(Icons.lock),
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF168039), width: 2.5),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0))),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFF168039), width: 2.5),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)))),
+        child: Column(
+          children: [
+            TextFormField(
+              controller: _kullaniciAdiController,
+              autofocus: true,
+              decoration: InputDecoration(
+                  labelText: Metinler.kullanici_adi,
+                  hintText: Metinler.kullanici_adi,
+                  prefixIcon: Icon(Icons.account_circle),
+                  suffixIcon: Icon(Icons.lock),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Color(0xFF168039), width: 2.5),
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color(0xFF168039), width: 2.5),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: ElevatedButton(
+                  onPressed: () {
+                    Veritabani vt = Veritabani(_kullaniciAdiController.text);
+                    vt.kullaniciKaydet();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                    );
+                  },
+                  child: Text(
+                    "Giriş Yap",
+                    style: TextStyle(fontSize: 18),
+                  )),
+            )
+          ],
         ),
       );
     } else {
