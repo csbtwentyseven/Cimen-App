@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'Strings.dart';
 import 'veritabani.dart';
 import 'home_page.dart';
+import 'NotificationApi.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class InputAlan extends StatefulWidget {
   late String tur;
@@ -19,6 +22,8 @@ class _InputAlanState extends State<InputAlan> {
   @override
   void initState() {
     super.initState();
+
+    tz.initializeTimeZones();
     _kullaniciAdiController = TextEditingController();
     _sifreKontroller = TextEditingController();
   }
@@ -73,7 +78,13 @@ class _InputAlanState extends State<InputAlan> {
                     "Giriş Yap",
                     style: TextStyle(fontSize: 18),
                   )),
-            )
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  NotificationService().showNotification(
+                      1, "ÇİMEN İSTEĞİ", "SAİD ÇİMEN İSTEDİ", 4);
+                },
+                child: Text("Bildirim Göster"))
           ],
         ),
       );
