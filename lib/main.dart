@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        theme:
+            ThemeData(primaryColor: Colors.green, primarySwatch: Colors.green),
         title: 'Material App',
         home: FutureBuilder(
           future: _fbApp,

@@ -51,8 +51,15 @@ class _InputAlanState extends State<InputAlan> {
               decoration: InputDecoration(
                   labelText: Metinler.kullanici_adi,
                   hintText: Metinler.kullanici_adi,
-                  prefixIcon: Icon(Icons.account_circle),
-                  suffixIcon: Icon(Icons.lock),
+                  focusColor: Colors.green,
+                  prefixIcon: Icon(
+                    Icons.account_circle,
+                    color: Colors.green,
+                  ),
+                  suffixIcon: Icon(
+                    Icons.lock,
+                    color: Colors.green,
+                  ),
                   focusedBorder: OutlineInputBorder(
                       borderSide:
                           BorderSide(color: Color(0xFF168039), width: 2.5),
@@ -66,25 +73,21 @@ class _InputAlanState extends State<InputAlan> {
             Padding(
               padding: const EdgeInsets.only(top: 30.0),
               child: ElevatedButton(
-                  onPressed: () {
-                    Veritabani vt = Veritabani(_kullaniciAdiController.text);
-                    vt.kullaniciKaydet();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Home()),
-                    );
-                  },
-                  child: Text(
-                    "Giriş Yap",
-                    style: TextStyle(fontSize: 18),
-                  )),
-            ),
-            ElevatedButton(
                 onPressed: () {
-                  NotificationService().showNotification(
-                      1, "ÇİMEN İSTEĞİ", "SAİD ÇİMEN İSTEDİ", 4);
+                  Veritabani vt = Veritabani(_kullaniciAdiController.text);
+                  vt.kullaniciKaydet();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Home()),
+                  );
                 },
-                child: Text("Bildirim Göster"))
+                child: Text(
+                  "Giriş Yap",
+                  style: TextStyle(fontSize: 18),
+                ),
+                style: ElevatedButton.styleFrom(primary: Colors.green),
+              ),
+            ),
           ],
         ),
       );

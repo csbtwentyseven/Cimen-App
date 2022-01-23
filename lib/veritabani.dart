@@ -23,16 +23,30 @@ class Veritabani {
     cimen_durum['tarih'] = FieldValue.serverTimestamp();
     cimen_durum['bildirim'] = true;
 
+    Map<String, dynamic> cimen_durum_bildirim = Map();
+    cimen_durum_bildirim['bildirim'] = true;
+
+    firestore
+        .collection("cimendurum")
+        .doc("bildirim")
+        .set(cimen_durum_bildirim);
     firestore.collection("cimendurum").doc("cimendurum").set(cimen_durum);
+    firestore
+        .collection("cimendurum")
+        .doc("bildirim")
+        .set(cimen_durum_bildirim);
   }
 
   void cimenSifirla() async {
     final prefs = await SharedPreferences.getInstance();
     String isteyenKisi = prefs.getString('username')!;
-    Map<String, dynamic> cimen_durum = Map();
-    cimen_durum['bildirim'] = false;
+    Map<String, dynamic> cimen_durum_bildirim = Map();
+    cimen_durum_bildirim['bildirim'] = false;
 
-    firestore.collection("cimendurum").doc("cimendurum").set(cimen_durum);
+    firestore
+        .collection("cimendurum")
+        .doc("bildirim")
+        .set(cimen_durum_bildirim);
   }
 
   Future<String> cimenIstendiMi() async {

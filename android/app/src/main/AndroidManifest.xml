@@ -20,7 +20,7 @@
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
-              android:resource="@drawable/ic_flutternotification"
+              
               />
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
@@ -30,7 +30,7 @@
             <meta-data
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
-              android:resource="@drawable/ic_flutternotification"
+             
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -43,7 +43,7 @@
             android:name="flutterEmbedding"
             android:value="2"
             
-            android:resource="@drawable/ic_flutternotification" />
+             />
             
     </application>
 </manifest>
