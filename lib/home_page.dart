@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'veritabani.dart';
 
@@ -36,6 +38,10 @@ class _HomeState extends State<Home> {
             IconButton(
               onPressed: () async {
                 Veritabani vt = Veritabani("gerekyok");
+                Timer(Duration(seconds: 3), () {
+                  vt.cimenSifirla();
+                });
+
                 vt.cimenIste();
 
                 String cimenMesaj = await vt.cimenIstendiMi();

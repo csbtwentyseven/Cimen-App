@@ -21,6 +21,16 @@ class Veritabani {
     cimen_durum['cimen_durum'] = true;
     cimen_durum['cimen_durum_mesaj'] = '$isteyenKisi çimen istedi';
     cimen_durum['tarih'] = FieldValue.serverTimestamp();
+    cimen_durum['bildirim'] = true;
+
+    firestore.collection("cimendurum").doc("cimendurum").set(cimen_durum);
+  }
+
+  void cimenSifirla() async {
+    final prefs = await SharedPreferences.getInstance();
+    String isteyenKisi = prefs.getString('username')!;
+    Map<String, dynamic> cimen_durum = Map();
+    cimen_durum['bildirim'] = false;
 
     firestore.collection("cimendurum").doc("cimendurum").set(cimen_durum);
   }
