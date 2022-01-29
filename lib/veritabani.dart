@@ -42,10 +42,16 @@ class Veritabani {
     String isteyenKisi = prefs.getString('username')!;
     Map<String, dynamic> cimen_durum_bildirim = Map();
     cimen_durum_bildirim['bildirim'] = false;
+    cimen_durum_bildirim['cimen_durum_mesaj'] = "Kimse Çimen İstemedi Sadıç...";
 
     firestore
         .collection("cimendurum")
         .doc("bildirim")
+        .set(cimen_durum_bildirim);
+
+    firestore
+        .collection("cimendurum")
+        .doc("cimendurum")
         .set(cimen_durum_bildirim);
   }
 
@@ -58,6 +64,7 @@ class Veritabani {
 
     var sonCimenData = cimenData?["cimen_durum"];
     var cimenMesaj = cimenData?["cimen_durum_mesaj"];
+
     print(cimenMesaj);
 
     return cimenMesaj;

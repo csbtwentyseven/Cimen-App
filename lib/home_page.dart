@@ -32,49 +32,15 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     CollectionReference cimenColRef = vt.firestore.collection('cimendurum');
     var cimenDocRef = cimenColRef.doc('bildirim');
+    var mesajDocRef = cimenColRef.doc('cimendurum');
 
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 80.0),
-              child: Text(
-                "Çimen İstemek İçin Aşağıdaki Butona Bas Sadıç",
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF168039)),
-              ),
-            ),
-            IconButton(
-              onPressed: () async {
-                Veritabani vt = Veritabani("gerekyok");
-                Timer(Duration(seconds: 3), () {
-                  vt.cimenSifirla();
-                });
-
-                vt.cimenIste();
-
-                String cimenMesaj = await vt.cimenIstendiMi();
-                mesajDegistir(cimenMesaj);
-              },
-              icon: Image.asset('assets/butonimg.png'),
-              iconSize: 256,
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 60.0),
-              child: Text(
-                '$cimenMesaj',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                ),
-              ),
-            ),
             StreamBuilder<DocumentSnapshot>(
-              stream: cimenDocRef.snapshots(),
+              stream: mesajDocRef.snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Text('ERROR');
@@ -87,7 +53,44 @@ class _HomeState extends State<Home> {
                   if (user_data!["bildirim"]) {
                     bildirimGonder();
                   }
-                  return Text("${user_data["bildirim"]}");
+                  return Text(
+                    "${user_data["cimen_durum_mesaj"]}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        color: Colors.green[800]),
+                  );
+                }
+              },
+            ),
+            IconButton(
+              onPressed: () async {
+                Veritabani vt = Veritabani("gerekyok");
+                Timer(Duration(seconds: 6), () {
+                  vt.cimenSifirla();
+                });
+
+                vt.cimenIste();
+
+                String cimenMesaj = await vt.cimenIstendiMi();
+                mesajDegistir(cimenMesaj);
+              },
+              icon: Image.asset('assets/butonimg.png'),
+              iconSize: 256,
+            ),
+            StreamBuilder<DocumentSnapshot>(
+              stream: cimenDocRef.snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('ERROR');
+                } else if (snapshot.connectionState ==
+                    ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  Map<String, dynamic>? user_data =
+                      snapshot.data!.data() as Map<String, dynamic>?;
+
+                  return Text("${user_data!["bildirim"]}");
                 }
               },
             ),
@@ -100,8 +103,9 @@ class _HomeState extends State<Home> {
   Future<void> bildirimGonder() async {
     var sharedPreferences = await SharedPreferences.getInstance();
     final prefs = await SharedPreferences.getInstance();
+    String bildirimMesaj = await vt.cimenIstendiMi();
 
-    NotificationService().showNotification(
-        1, "ÇİMEN İSTEĞİ", "${prefs.getString('username')} ÇİMEN İSTEDİ", 4);
+    NotificationService()
+        .showNotification(1, "ÇİMEN İSTEĞİ", "$bildirimMesaj", 4);
   }
 }
